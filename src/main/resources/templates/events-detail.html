@@ -1,0 +1,67 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+<head>
+    <title>События</title>
+</head>
+<body class="d-flex flex-column">
+<section layout:fragment="body">
+    <header class="py-5 bg-light border-bottom mb-4">
+        <div class="container">
+            <div class="text-center my-5">
+                <h1 class="fw-bolder" th:text="${event.name}"></h1>
+                <p class="lead mb-0">Велоклуб вашего города</p>
+            </div>
+        </div>
+    </header>
+    <!-- Page content-->
+    <div class="container">
+        <div class="row">
+            <!-- Blog entries-->
+            <div class="col-lg-8">
+                <!-- Featured blog post-->
+                <div class="card mb-4">
+                    <a href="#!"><img class="card-img-top" th:src="${event.photoUrl}" alt="..." /></a>
+                    <div class="card-body">
+                        <div class="small text-muted" th:text="${event.createdOn}"></div>
+                        <h2 class="card-title">Об этом событии</h2>
+                        <p class="card-text" th:text="${event.type}"></p>
+                        <div th:if="${user.id} == ${event.club.user.id}">
+                            <a class="btn btn-primary" th:href="@{/events/{eventId}/delete(eventId=${event.id})}">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Side widgets-->
+            <div class="col-lg-4">
+                <!-- Search widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Поиск</div>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input class="form-control" type="text" aria-label="Введите запрос" placeholder="Введите запрос" aria-describedby="button-search" />
+                            <button class="btn btn-primary" id="button-search" type="button">Поиск!</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Categories widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Категории</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="#!">Дорога</a></li>
+                                    <li><a href="#!">Марафон</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
